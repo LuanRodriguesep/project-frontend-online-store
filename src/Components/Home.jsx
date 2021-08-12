@@ -16,18 +16,29 @@ class Home extends React.Component {
 
   handleClick = (inputValue) => {
     getProductsFromCategoryAndQuery(inputValue)
-      .then((data) => this.setState({
-        results: data.results,
-      }));
+      .then((data) => {
+        this.setState({
+          results: data.results,
+        });
+        // console.log(category)
+      });
   }
+  // console.log(category))
+
+  // handleClickCategory =(categoryValue) => {
+  //   getProductsFromCategoryAndQuery(categoryValue)
+  //   .then((data) => this.setState({
+  //     results: data.results,
+  //   }));
+  // }
 
   render() {
     const { results } = this.state;
     return (
       <div>
-        <SearchBar handleClick={ this.handleClick } />
         <Link to="/cart" data-testid="shopping-cart-button">link pra ShoppingCart</Link>
-        <Categories />
+        <SearchBar handleClick={ this.handleClick } />
+        <Categories handleClick={ this.handleClick } />
         <ProductList results={ results } />
       </div>
     );

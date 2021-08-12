@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { getCategories } from '../services/api';
 import CategorieCard from './CategorieCard';
 
 class Categories extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       categories: [],
@@ -23,16 +24,26 @@ class Categories extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const { handleClick } = this.props;
 
     return (
       <div>
 
         <h2>Categorias:</h2>
-        { categories.map(({ id, name }) => <CategorieCard key={ id } name={ name } />) }
+        { categories.map(({ id, name }) => (<CategorieCard
+          key={ id }
+          name={ name }
+          handleClick={ handleClick }
+        />)) }
 
       </div>
     );
   }
 }
+
+Categories.propTypes = {
+  handleClick: PropTypes.func,
+  name: PropTypes.string,
+}.isRequire;
 
 export default Categories;
