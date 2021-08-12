@@ -2,23 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class CategorieCard extends React.Component {
-  // constructor() {
-  //   super();
+  constructor(props) {
+    super(props);
+    const { name } = this.props;
 
-  //   this.state = {
-  //     id: '',
-  //     name:'',
-  //   };
-  // }
+    this.state = {
+      category: name,
+    };
+  }
 
   render() {
-    const { name } = this.props;
+    const { name, handleClick } = this.props;
+    const { category } = this.state;
 
     return (
       <div>
-        <p data-testid="category">
+        {/* <a href='' onClick={ () => handleClick(category) }>{name} </a> */}
+        <button
+          type="button"
+          data-testid="category"
+          onClick={ () => handleClick(category) }
+        >
+          {name}
+
+        </button>
+
+        {/* <p data-testid="category">
           { name }
-        </p>
+        </p> */}
       </div>
     );
   }
