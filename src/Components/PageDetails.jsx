@@ -1,22 +1,29 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-// import { getProductsFromCategoryAndQuery } from '../services/api';
-import ProductDetails from './ProductDetails';
 
 class PageDetails extends React.Component {
   constructor(props) {
     super(props);
-    const { match, location } = this.props;
-    const { params } = match;
-    const { state } = location;
+    // const { match, location } = this.props;
+    // const { params } = match;
+    // const { state } = location;
     this.state = {
-      id: params.id,
+      // id: params.id,
       product: [],
-      dataApi: state,
+      attrib: [],
+      // dataApi: state,
+
+      // results: {
+      //   title: '',
+      //   price: 0,
+      //   id: '',
+      //   attributes: '',
+      // }
     };
   }
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
   }
 
   fetchData = async () => {
@@ -26,24 +33,46 @@ class PageDetails extends React.Component {
     const result = await response.json();
     this.setState({
       product: result,
+      attrib: result.attributes,
     });
   }
 
   render() {
     const { product } = this.state;
-    const { title, price, thumbnail, attributes } = product;
-    return (
+    const { title, price, thumbnail } = product;
+    const { attrib } = this.state;
 
-        <div>
-          {attributes.map(({ name }) => (<ProductDetails
-            key={name}
-            name={name}
-          />))}
-        </div>
+    return (
+      <div data-testid="product-detail-name">
+
+        { attrib.map((atrib) => (
+          <p key={ atrib.name }>
+
+            {atrib.name}
+
+            {atrib.value_name}
+          </p>
+        ))}
+
+        <h1>Testando</h1>
+        <p>{title}</p>
+        <p>{price}</p>
+        <img src={ thumbnail } alt={ title } />
+      </div>
 
     );
   }
 }
 
-export default PageDetails;
+PageDetails.propTypes = {
+  // location: PropTypes.shape({
+  //   state: PropTypes.any,
+  // }),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }).isRequired,
+};
 
+export default PageDetails;
