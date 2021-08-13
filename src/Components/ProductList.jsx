@@ -12,6 +12,7 @@ class ProductList extends React.Component {
           title={ title }
           price={ price }
           thumbnail={ thumbnail }
+          id={ id }
         />)) }
       </div>
     );

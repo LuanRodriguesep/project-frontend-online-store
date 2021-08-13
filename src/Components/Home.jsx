@@ -40,6 +40,7 @@ class Home extends React.Component {
         <SearchBar handleClick={ this.handleClick } />
         <Categories handleClick={ this.handleClick } />
         <ProductList results={ results } />
+
       </div>
     );
   }
