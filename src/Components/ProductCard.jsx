@@ -3,6 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
+  idForLocalStorage = (id) => {
+    localStorage.setItem(id, id);
+  }
+
   render() {
     const { title, price, thumbnail, id } = this.props;
     return (
@@ -14,7 +18,13 @@ class ProductCard extends React.Component {
         </p>
         <img src={ thumbnail } alt={ title } />
         <Link to={ `details/${id}` } data-testid="product-detail-link">Detalhes</Link>
-        {/* <Link to={ { pathname: `${id}/edit` } }>EDITAR</Link>  */}
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ () => this.idForLocalStorage(id) }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
