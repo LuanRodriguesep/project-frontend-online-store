@@ -32,7 +32,8 @@ class ShoppingCart extends React.Component {
 
   render() {
     const { product, empty } = this.state;
-    const xaBlaU = () => {
+    //alterado nome de xaBlau para cartIsEmpty
+    const cartIsEmpty = () => {
       const verify = (empty)
         ? <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
         : undefined;
@@ -57,7 +58,7 @@ class ShoppingCart extends React.Component {
           </p>
         ))}
         {' '}
-        { xaBlaU() }
+        { cartIsEmpty() }
       </div>
     );
   }
