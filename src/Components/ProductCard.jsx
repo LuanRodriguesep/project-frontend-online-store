@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   idForLocalStorage = (id) => {
-    localStorage.setItem(id, id);
+    localStorage.setItem(id, 1);
+    // localStorage.setItem(id, id);
+    // alterado (id,id) para (id,1) assim a quantidade fica sendo o valor
   }
 
   render() {

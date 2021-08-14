@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class PageDetails extends React.Component {
   constructor(props) {
@@ -26,6 +27,12 @@ class PageDetails extends React.Component {
     this.fetchData();
   }
 
+  idForLocalStorage = (id) => {
+    localStorage.setItem(id, 1);
+    // localStorage.setItem(id, id);
+    // alterado (id,id) para (id,1) assim a quantidade fica sendo o valor
+  }
+
   fetchData = async () => {
     const { match } = this.props;
     const { params } = match;
@@ -39,7 +46,7 @@ class PageDetails extends React.Component {
 
   render() {
     const { product } = this.state;
-    const { title, price, thumbnail } = product;
+    const { title, price, thumbnail, id } = product;
     const { attrib } = this.state;
 
     return (
@@ -54,10 +61,20 @@ class PageDetails extends React.Component {
           </p>
         ))}
 
-        <h1>Testando</h1>
         <p>{title}</p>
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
+        {/* criar um botao que faz a funcao de storage */}
+
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => this.idForLocalStorage(id) }
+        >
+          Adicionar ao carrinho
+        </button>
+
+        <Link to="/cart" data-testid="shopping-cart-button">link pra ShoppingCart</Link>
       </div>
 
     );
