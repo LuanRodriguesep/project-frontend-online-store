@@ -50,7 +50,7 @@ class PageDetails extends React.Component {
     const { attrib } = this.state;
 
     return (
-      <div data-testid="product-detail-name">
+      <div>
 
         { attrib.map((atrib) => (
           <p key={ atrib.name }>
@@ -59,9 +59,9 @@ class PageDetails extends React.Component {
 
             {atrib.value_name}
           </p>
-        ))}
 
-        <p>{title}</p>
+        ))}
+        <p data-testid="product-detail-name">{title}</p>
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
         {/* criar um botao que faz a funcao de storage */}
