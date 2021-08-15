@@ -18,6 +18,15 @@ class ShoppingCart extends React.Component {
     });
   }
 
+  // componentDidUpdate() {
+  //   Object.keys(localStorage).forEach((key) => {
+  //     this.fetchData(key);
+  //     // criado logica para alterar quantidade no carrinho
+  //     const CartAmount = localStorage.getItem(key);
+  //     console.log(CartAmount);
+  //   });
+  // }
+
   fetchData = async (key) => {
     const response = await fetch(`https://api.mercadolibre.com/items/${key}?include_attributes=all`);
     const result = await response.json();
@@ -40,6 +49,32 @@ class ShoppingCart extends React.Component {
   //   console.log(teste);
 
   // }
+  // funcao para somar ou subtrair
+  itemPlus = (id) => {
+    let retorno = parseInt(localStorage.getItem(id), 10);
+    retorno += 1;
+    localStorage.setItem(id, retorno);
+    this.forceUpdate();
+    console.log(retorno);
+  }
+
+  itemLess = (id) => {
+    let retorno = parseInt(localStorage.getItem(id), 10);
+
+    // ternario caso seja 0
+    if (retorno === 1) {
+      // console.log('sou zero');
+      localStorage.removeItem(id);
+      this.forceUpdate();
+      // this.setState()
+    } else {
+      // senao segue nornal
+      retorno -= 1;
+      localStorage.setItem(id, retorno);
+      this.forceUpdate();
+      console.log(retorno);
+    }
+  }
 
   render() {
     const { product, empty } = this.state;
@@ -55,6 +90,7 @@ class ShoppingCart extends React.Component {
       <div>
 
         { product.map((atrib) => (
+
           <p data-testid="shopping-cart-product-name" key={ atrib.id }>
 
             {atrib.title}
@@ -65,10 +101,21 @@ class ShoppingCart extends React.Component {
               Quantidade:
               {' '}
               {localStorage.getItem(atrib.id)}
-              {/* quantidade:
-              {' '}
-              {atrib.available_quantity}
-              1 */}
+              <button
+                type="button"
+                data-testid="product-increase-quantity"
+                onClick={ () => this.itemPlus(atrib.id) }
+              >
+                Aumentar
+              </button>
+              <button
+                type="button"
+                data-testid="product-decrease-quantity"
+                onClick={ () => this.itemLess(atrib.id) }
+              >
+                Reduzir
+              </button>
+
             </span>
           </p>
         ))}
