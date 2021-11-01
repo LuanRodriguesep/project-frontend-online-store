@@ -1,7 +1,7 @@
 
 ### Projeto front-end online store
 
-## O que deverá ser desenvolvido
+## O que foi desenvolvido
 
 Neste projeto você criamos uma versão simplificada, sem persistência no banco de dados, de uma **loja online**, desenvolvendo em grupo suas funcionalidades de acordo com demandas definidas em um quadro _Kanban_, em um cenário mais próximo ao do mercado de trabalho. A partir dessas demandas, teremos uma aplicação onde os usuários poderão:
   - Buscar produtos por termos e categorias a partir da _API do Mercado Livre_;
